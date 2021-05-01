@@ -1,0 +1,43 @@
+version: '3'
+services:
+
+  #MySQL Service
+  db:
+    image: mysql:5.7.22
+    container_name: db-watchman
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3309:3306"
+    environment:
+      MYSQL_DATABASE: watchman
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: dev
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - app-network
+    volumes:
+      - my-datavolume:/var/lib/mysql
+  mongodb_container:
+    image: mongo:4.1.1
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - 27017:27017
+    networks:
+      - app-network
+    volumes:
+      - mongodb_data_container:/data/db
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+#Volumes
+volumes:
+  dbdata:
+    driver: local
+  my-datavolume:
+  mongodb_data_container:
