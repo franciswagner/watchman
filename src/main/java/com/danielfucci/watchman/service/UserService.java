@@ -4,4 +4,6 @@ import com.danielfucci.watchman.domain.model.User;
 
 public interface UserService {
     Iterable<User> getAll();
+
+    void register(User newUser);
 }

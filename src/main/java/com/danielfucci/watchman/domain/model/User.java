@@ -32,9 +32,8 @@ public class User {
     private String password;
 
     @NotNull
-    private String status;
+    private Boolean enabled;
 
-    @NotNull
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
